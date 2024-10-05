@@ -1,0 +1,259 @@
+---
+title: "ps1_wang_george"
+format: html
+jupyter: python3
+echo: true
+---
+
+
+This submission is my work alone and complies with the 30538 integrity policy. **GW**
+
+I have uploaded the names of anyone I worked with on the problem set here **NONE**
+
+Late coins used this pset: **0**
+
+# Reading Q1
+```{python, name='Read Q1'}
+import time
+import pandas as pd
+import altair as alt
+
+alt.renderers.set_embed_options(scaleFactor=2)
+
+start = time.time()
+df = pd.read_csv('parking_tickets_one_percent.csv')
+end = time.time()
+
+duration = end - start
+
+print("It take", duration, "seconds to read.")
+
+assert len(df) == 287458, f"Expected 287458, but found {len(df)}"
+```
+
+# Reading Q2
+```{python, name='Q2'}
+import os
+
+size_in_byte = os.path.getsize('parking_tickets_one_percent.csv')
+
+size_in_mb = size_in_byte / (1024 * 1024)
+
+full_size_in_mb = size_in_mb * 100
+
+print(f"The 1% sample file size is {size_in_mb:.2f} mb")
+print(f"The predicted size of the full dataset is {full_size_in_mb:.2f} mb")
+```
+
+# Reading Q3
+```{python, name='Q3'}
+import pandas as pd
+
+df = pd.read_csv('parking_tickets_one_percent.csv')
+print(df.head())
+# The rows on the dataset are ordered by the issue_date
+
+subset_df = df.iloc[:500]
+
+def is_column_ordered(column):
+    return column.is_monotonic_increasing or column.is_monotonic_decreasing
+
+for col in subset_df.columns:
+    if is_column_ordered(subset_df[col]):
+        print(f"The column '{col}' is ordered.")
+```
+
+# Cleaning Q1
+```{python, name='Cleaning Q1'}
+df['issue_date'] = pd.to_datetime(df['issue_date'])
+
+ticket_2017_sample = df[df['issue_date'].dt.year == 2017]
+print(ticket_2017_sample)
+
+ticket_2017_full = len(ticket_2017_sample) * 100
+print(ticket_2017_full)
+
+# The estimated number of tickest is 2,236,400.
+
+# According to ProPublica article, mroe than 3 million tickets were issues each year.
+
+# This difference is meaningful as the article says that mroe than 3 million, but 
+# the estimated number is around 2.2 million.
+```
+
+# Cleaning Q2
+```{python, name='Cleaning Q2'}
+import altair as alt
+import pandas as pd
+
+top_violation = df['violation_description'].value_counts().head(20).reset_index()
+
+print(top_violation)
+
+top_violation.columns = ['violation_description', 'frequency']
+
+chart = alt.Chart(top_violation).mark_bar().encode(
+    x=alt.X('frequency:Q', title='Frequency'),
+    y=alt.Y('violation_description:N', title='Violation Type', sort='-x')
+).properties(
+    width=600, 
+    height=400, 
+    title="Top 20 Violation Types"
+).configure_axis(
+    labelFontSize=5,
+    titleFontSize=10,
+    labelLimit=200
+)
+
+chart
+```
+
+# Visual Q1
+| **Variable Name**             | **Altair Data Type**       |
+|-------------------------------|----------------------------|
+| Unnamed: 0                    | Nominal (N)                |
+| ticket_number                 | Ordinal (O) / Nominal (N)  |
+| issue_date                    | Temporal (T)               |
+| violation_location            | Nominal (N)                |
+| license_plate_number          | Ordinal (O) / Nominal (N)  |
+| license_plate_state           | Nominal (N)                |
+| license_plate_type            | Nominal (N)                |
+| zipcode                       | Ordinal (O) / Nominal (N)  |
+| violation_code                | Ordinal (O) / Nominal (N)  |
+| violation_description         | Nominal (N)                |
+| unit                          | Nominal (N)                |
+| unit_description              | Nominal (N)                |
+| vehicle_make                  | Nominal (N)                |
+| fine_level1_amount            | Quantitative (Q)           |
+| fine_level2_amount            | Quantitative (Q)           |
+| current_amount_due            | Quantitative (Q)           |
+| total_payments                | Nominal (N)                |
+| ticket_queue                  | Nominal (N)                |
+| ticket_queue_date             | Temporal (T)               |
+| notice_level                  | Nominal (N)                |
+| hearing_disposition           | Nominal (N)                |
+| notice_number                 | Ordinal (O) / Nominal (N)  |
+| officer                       | Nominal (N)                |
+| address                       | Nominal (N)                |
+
+- ticket_number: if it is in time sequence, then it is ordinal; if it is a just unique identifier, then it should be nominal.
+- license_plate_number: If the plate number is is time sequence, then it should be ordinal; if it is just random plate number, then it is just nominal.
+-  zipcode: if the zipcode follow certain geographical order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.
+- violation_code: if the violation code follow certain time order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.
+- notice_number: if the notice number also follows time order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.
+
+# Visual Q2
+```{python, name='Visual Q2'}
+df['paid'] = df['current_amount_due'] == 0  
+
+vehicle_paid = df.groupby('vehicle_make')['paid'].mean().reset_index()
+vehicle_paid.columns = ['Vehicle Make', 'Fraction Paid']
+
+vehicle_paid = vehicle_paid.sort_values(by='Fraction Paid', ascending=False)
+
+chart = alt.Chart(vehicle_paid).mark_bar().encode(
+    x=alt.X('Fraction Paid:Q', title='Fraction'),
+    y=alt.Y('Vehicle Make:N', sort='-x', title='Vehicle Make')
+).properties(
+    width=600, 
+    height=1500, 
+    title="Fraction of Payment by Brand"
+)
+
+chart
+# Different auto brands have different prices. More luxury cars' owners have more 
+# financial ability to pay these tickets, while affordable cars may be more 
+# unlikely to pay these tockets due to lower incomes.
+```
+
+# Visual Q3
+```{python, name = "Visual Q3"}
+import altair as alt
+import pandas as pd
+
+df['Month'] = df['issue_date'].dt.to_period('M').astype(str)
+
+tickets_over_time = df.groupby('Month').size().reset_index(name='count')
+
+chart = alt.Chart(tickets_over_time).mark_area(
+    color="lightblue",
+    interpolate='step-after',
+    line=True
+).encode(
+    x=alt.X('Month:O', title='Month'),
+    y='count:Q'
+).properties(
+    title='Number of Tickets Issued Over Time'
+).properties(
+    width=600, 
+    height=600
+).configure_axis(
+    labelFontSize=5)
+
+chart
+```
+
+# Visual Q4
+```{python, name = "Visual Q4"}
+import altair as alt
+import pandas as pd
+
+df['month'] = df['issue_date'].dt.month
+df['day'] = df['issue_date'].dt.day
+
+tickets_by_month_day = df.groupby(['month', 'day']).size().reset_index(name='count')
+
+heatmap = alt.Chart(tickets_by_month_day).mark_rect().encode(
+    x=alt.X('day:O', title='Day'), 
+    y=alt.Y('month:O', title='Month'),
+    color=alt.Color('count:Q', title='Ticket Count')
+).properties(
+    title='Number of Tickets Issued by Month and Day',
+    width=500,
+    height=300
+)
+
+heatmap
+```
+
+# Visual Q5
+```{python, name = "Visual Q5"}
+import altair as alt
+import pandas as pd
+
+df['issue_date'] = pd.to_datetime(df['issue_date'], errors='coerce')
+
+top_violations = df['violation_description'].value_counts().nlargest(5).index
+
+df_top_violations = df[df['violation_description'].isin(top_violations)]
+
+df_top_violations['month'] = df_top_violations['issue_date'].dt.to_period('M').astype(str)
+
+tickets_over_time = df_top_violations.groupby(['month', 'violation_description']).size().reset_index(name='count')
+
+chart = alt.Chart(tickets_over_time).mark_rect().encode(
+    x=alt.X('month:O', title='Month', axis=alt.Axis(labelAngle=45)),
+    y=alt.Y('violation_description:N', title='Violation Type'),
+    color=alt.Color('count:Q', title='Ticket Count')
+).properties(
+    width=800,
+    height=600,
+    title='Number of Tickets Issued by Type'
+).configure_axis(
+    labelFontSize=5)
+
+chart
+
+```
+
+# Visual Q6
+
+- Step Chart: It is easy to see the overall trend of tickets over time of all types of violations, and easy to read the trend (up and down), but type of violations and its relationship to time is not clear because no specific information is not provided.
+
+- Heatmap: It is easy to see the trend of date over month and abnormalies in each month, and easy to read, but the relationship between time and type of violations is still not clear.
+
+- Lasagna Plot: It is easy to see the relationship between type of violations and time (date within same motnh), and the pattern over moth. However, the pattern between the total amount of violations and month or date is not easy to spot by eyerolling, and it is too crowded to see pattern within lasagna plot.
+
+# Visual Q7
+Step chart is better because it focuses on the relationship between the TOTAL number of violations and time. Not the relationship between the type of violations and time, or the date within the same month, so the step chart is easier.
+

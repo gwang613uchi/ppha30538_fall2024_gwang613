@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ps1_wang_george</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="ps1_wang_george_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ps1_wang_george_files/libs/quarto-html/quarto.js"></script>
+<script src="ps1_wang_george_files/libs/quarto-html/popper.min.js"></script>
+<script src="ps1_wang_george_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ps1_wang_george_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ps1_wang_george_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ps1_wang_george_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ps1_wang_george_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ps1_wang_george_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ps1_wang_george_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ps1_wang_george</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This submission is my work alone and complies with the 30538 integrity policy. <strong>GW</strong></p>
+<p>I have uploaded the names of anyone I worked with on the problem set here <strong>NONE</strong></p>
+<p>Late coins used this pset: <strong>0</strong></p>
+<section id="reading-q1" class="level1">
+<h1>Reading Q1</h1>
+<div id="7d99a256" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>alt.renderers.set_embed_options(scaleFactor<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'parking_tickets_one_percent.csv'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>duration <span class="op">=</span> end <span class="op">-</span> start</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"It take"</span>, duration, <span class="st">"seconds to read."</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(df) <span class="op">==</span> <span class="dv">287458</span>, <span class="ss">f"Expected 287458, but found </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>It take 0.7661051750183105 seconds to read.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/k2/prgbv7z97knbd104r93pncfc0000gp/T/ipykernel_44096/2253431564.py:8: DtypeWarning: Columns (7) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv('parking_tickets_one_percent.csv')</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-q2" class="level1">
+<h1>Reading Q2</h1>
+<div id="558d3884" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>size_in_byte <span class="op">=</span> os.path.getsize(<span class="st">'parking_tickets_one_percent.csv'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>size_in_mb <span class="op">=</span> size_in_byte <span class="op">/</span> (<span class="dv">1024</span> <span class="op">*</span> <span class="dv">1024</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>full_size_in_mb <span class="op">=</span> size_in_mb <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The 1% sample file size is </span><span class="sc">{</span>size_in_mb<span class="sc">:.2f}</span><span class="ss"> mb"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The predicted size of the full dataset is </span><span class="sc">{</span>full_size_in_mb<span class="sc">:.2f}</span><span class="ss"> mb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The 1% sample file size is 79.78 mb
+The predicted size of the full dataset is 7978.00 mb</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-q3" class="level1">
+<h1>Reading Q3</h1>
+<div id="3bd76f8c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'parking_tickets_one_percent.csv'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The rows on the dataset are ordered by the issue_date</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>subset_df <span class="op">=</span> df.iloc[:<span class="dv">500</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_column_ordered(column):</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> column.is_monotonic_increasing <span class="kw">or</span> column.is_monotonic_decreasing</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> subset_df.columns:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_column_ordered(subset_df[col]):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The column '</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">' is ordered."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Unnamed: 0  ticket_number           issue_date violation_location  \
+0           1     51482901.0  2007-01-01 01:25:00    5762 N AVONDALE   
+1           2     50681501.0  2007-01-01 01:51:00    2724 W FARRAGUT   
+2           3     51579701.0  2007-01-01 02:22:00       1748 W ESTES   
+3           4     51262201.0  2007-01-01 02:35:00    4756 N SHERIDAN   
+4           5     51898001.0  2007-01-01 03:50:00    7134 S CAMPBELL   
+
+                                license_plate_number license_plate_state  \
+0  d41ee9a4cb0676e641399ad14aaa20d06f2c6896de6366...                  IL   
+1  3395fd3f71f18f9ea4f0a8e1f13bf0aa15052fc8e5605a...                  IL   
+2  302cb9c55f63ff828d7315c5589d97f1f8144904d66eb3...                  IL   
+3  94d018f52c7990cea326d1810a3278e2c6b1e8b44f3c52...                  IL   
+4  876dd3a95179f4f1d720613f6e32a5a7b86b0e6f988bf4...                  IL   
+
+  license_plate_type      zipcode violation_code  \
+0                PAS  606184118.0       0964090E   
+1                PAS  606454911.0       0964090E   
+2                PAS  604116803.0       0964150B   
+3                PAS  606601345.0       0976160F   
+4                PAS  606291432.0       0964100A   
+
+                      violation_description  ...  fine_level2_amount  \
+0                RESIDENTIAL PERMIT PARKING  ...                 100   
+1                RESIDENTIAL PERMIT PARKING  ...                 100   
+2       PARKING/STANDING PROHIBITED ANYTIME  ...                 100   
+3  EXPIRED PLATES OR TEMPORARY REGISTRATION  ...                 100   
+4                WITHIN 15' OF FIRE HYDRANT  ...                 200   
+
+  current_amount_due total_payments  ticket_queue  ticket_queue_date  \
+0                0.0           50.0          Paid         2007-03-20   
+1                0.0           50.0          Paid         2007-01-31   
+2              122.0            0.0        Notice         2007-02-28   
+3                0.0           50.0          Paid         2007-01-11   
+4                0.0          100.0          Paid         2007-04-25   
+
+   notice_level  hearing_disposition notice_number officer  \
+0          DETR               Liable  5.080059e+09   17266   
+1          VIOL                  NaN  5.079876e+09   10799   
+2          SEIZ                  NaN  5.037862e+09   17253   
+3           NaN                  NaN  5.075310e+09    3307   
+4          DETR                  NaN  5.073568e+09   16820   
+
+                        address  
+0  5700 n avondale, chicago, il  
+1  2700 w farragut, chicago, il  
+2     1700 w estes, chicago, il  
+3  4700 n sheridan, chicago, il  
+4  7100 s campbell, chicago, il  
+
+[5 rows x 24 columns]
+The column 'Unnamed: 0' is ordered.
+The column 'issue_date' is ordered.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/k2/prgbv7z97knbd104r93pncfc0000gp/T/ipykernel_44096/105365041.py:3: DtypeWarning: Columns (7) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv('parking_tickets_one_percent.csv')
+/var/folders/k2/prgbv7z97knbd104r93pncfc0000gp/T/ipykernel_44096/105365041.py:10: FutureWarning: In a future version, the Index constructor will not infer numeric dtypes when passed object-dtype sequences (matching Series behavior)
+  return column.is_monotonic_increasing or column.is_monotonic_decreasing
+/var/folders/k2/prgbv7z97knbd104r93pncfc0000gp/T/ipykernel_44096/105365041.py:10: FutureWarning: In a future version, the Index constructor will not infer numeric dtypes when passed object-dtype sequences (matching Series behavior)
+  return column.is_monotonic_increasing or column.is_monotonic_decreasing</code></pre>
+</div>
+</div>
+</section>
+<section id="cleaning-q1" class="level1">
+<h1>Cleaning Q1</h1>
+<div id="e386285b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'issue_date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'issue_date'</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ticket_2017_sample <span class="op">=</span> df[df[<span class="st">'issue_date'</span>].dt.year <span class="op">==</span> <span class="dv">2017</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ticket_2017_sample)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ticket_2017_full <span class="op">=</span> <span class="bu">len</span>(ticket_2017_sample) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ticket_2017_full)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The estimated number of tickest is 2,236,400.</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># According to ProPublica article, mroe than 3 million tickets were issues each year.</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># This difference is meaningful as the article says that mroe than 3 million, but </span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># the estimated number is around 2.2 million.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Unnamed: 0  ticket_number          issue_date  violation_location  \
+257333      257334   6.914120e+07 2017-01-01 00:00:00  3959 W SHAKESPEARE   
+257334      257335   6.778040e+07 2017-01-01 00:44:00       6045 N TALMAN   
+257335      257336   6.742310e+07 2017-01-01 02:25:00     3550 W LAWRENCE   
+257336      257337   6.753130e+07 2017-01-01 03:23:00   11433 S THROOP ST   
+257337      257338   6.756880e+07 2017-01-01 03:57:00        7103 N CLARK   
+...            ...            ...                 ...                 ...   
+279692      279693   9.190000e+09 2017-12-31 17:02:00    2130 S ARCHER AV   
+279693      279694   6.868620e+07 2017-12-31 17:05:00        7850 S PERRY   
+279694      279695   6.955770e+07 2017-12-31 18:49:00           514  WOOD   
+279695      279696   6.905620e+07 2017-12-31 22:45:00           29 N LONG   
+279696      279697   6.880040e+07 2017-12-31 23:15:00     7900 S MARYLAND   
+
+                                     license_plate_number license_plate_state  \
+257333  07bef58da5eabab43fb335ae30ef7fb6ee02230e34756a...                  IL   
+257334  e475eaf95d2b9dda083c1bfc07ee4879ae2ca0c2978747...                  IL   
+257335  5d381c986245b8468d2312f4fdd468c0d0d78a3892d8c4...                  IL   
+257336  b6d6412c8e87a472a120354001f33e558b7e5421051d70...                  IL   
+257337  6d6c60f441ab94323e3043ca8beb2eb0501d205609888e...                  IL   
+...                                                   ...                 ...   
+279692  aefe88cc7b95a2749ab207e183992dd42847141d254324...                  IL   
+279693  ba93ba3a6e73a616900d82dc14bc0cac0bfb3fc14f3022...                  IL   
+279694  603e09c12c607a2ecfdc8062d4120edd10b2f5499d76fb...                  IL   
+279695  51ffe5a14228d8faf248691795668efa9079704249f933...                  IL   
+279696  77be5c88a87478db2a81d54c3faeb9717d49f641a86d44...                  IL   
+
+       license_plate_type    zipcode violation_code  \
+257333                PAS        NaN       0964110D   
+257334                PAS      60659       0964050J   
+257335                PAS  606254754        0912060   
+257336                PAS        NaN       0976160F   
+257337                PAS  604021849        0964060   
+...                   ...        ...            ...   
+279692                PAS      60628       0964190A   
+279693                PAS  604784921       0976160B   
+279694                PAS        NaN       0976160A   
+279695                PAS  606233926       0964090E   
+279696                PAS      60637       0964125B   
+
+                                    violation_description  ...  \
+257333                          PARK OR STAND ON SIDEWALK  ...   
+257334                              DISABLED PARKING ZONE  ...   
+257335              STAND, PARK, OR OTHER USE OF BUS LANE  ...   
+257336           EXPIRED PLATES OR TEMPORARY REGISTRATION  ...   
+257337                                  3-7 AM SNOW ROUTE  ...   
+...                                                   ...  ...   
+279692           EXP. METER NON-CENTRAL BUSINESS DISTRICT  ...   
+279693            EXPIRED PLATE OR TEMPORARY REGISTRATION  ...   
+279694       MISSING/NONCOMPLIANT FRONT AND/OR REAR PLATE  ...   
+279695                         RESIDENTIAL PERMIT PARKING  ...   
+279696  NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 ...  ...   
+
+        fine_level2_amount current_amount_due total_payments  ticket_queue  \
+257333                 120               60.0            0.0        Define   
+257334                 500                0.0          250.0          Paid   
+257335                 180                0.0           90.0          Paid   
+257336                 120               60.0            0.0        Define   
+257337                 120                0.0           60.0          Paid   
+...                    ...                ...            ...           ...   
+279692                 100                0.0            0.0     Dismissed   
+279693                 120              146.0            0.0        Notice   
+279694                 120               60.0            0.0        Define   
+279695                 150              150.0            0.0        Notice   
+279696                 400              400.0            0.0        Notice   
+
+        ticket_queue_date  notice_level  hearing_disposition notice_number  \
+257333         2018-01-09           NaN                  NaN  0.000000e+00   
+257334         2017-03-02          DETR               Liable  5.190000e+09   
+257335         2017-02-13          DETR                  NaN  5.200000e+09   
+257336         2017-01-18           NaN                  NaN  0.000000e+00   
+257337         2017-01-24          VIOL                  NaN  5.200000e+09   
+...                   ...           ...                  ...           ...   
+279692         2018-01-05           NaN                  NaN  5.210000e+09   
+279693         2018-01-10          SEIZ                  NaN  5.100000e+09   
+279694         2018-01-05           NaN                  NaN  0.000000e+00   
+279695         2018-01-10          FINL                  NaN  5.210000e+09   
+279696         2018-01-18          SEIZ                  NaN  5.210000e+09   
+
+       officer                          address  
+257333   16305  3900 w shakespeare, chicago, il  
+257334   15685       6000 n talman, chicago, il  
+257335   14454     3500 w lawrence, chicago, il  
+257336   13352   11400 s throop st, chicago, il  
+257337   17136        7100 n clark, chicago, il  
+...        ...                              ...  
+279692    1639    2100 s archer av, chicago, il  
+279693   15056        7800 s perry, chicago, il  
+279694   10731           500  wood, chicago, il  
+279695   17665            1 n long, chicago, il  
+279696   17752     7900 s maryland, chicago, il  
+
+[22364 rows x 24 columns]
+2236400</code></pre>
+</div>
+</div>
+</section>
+<section id="cleaning-q2" class="level1">
+<h1>Cleaning Q2</h1>
+<div id="9a5ca2c5" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>top_violation <span class="op">=</span> df[<span class="st">'violation_description'</span>].value_counts().head(<span class="dv">20</span>).reset_index()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_violation)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>top_violation.columns <span class="op">=</span> [<span class="st">'violation_description'</span>, <span class="st">'frequency'</span>]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(top_violation).mark_bar().encode(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'frequency:Q'</span>, title<span class="op">=</span><span class="st">'Frequency'</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'violation_description:N'</span>, title<span class="op">=</span><span class="st">'Violation Type'</span>, sort<span class="op">=</span><span class="st">'-x'</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>, </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span>, </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Top 20 Violation Types"</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>).configure_axis(</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    labelFontSize<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    titleFontSize<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    labelLimit<span class="op">=</span><span class="dv">200</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                index  violation_description
+0            EXPIRED PLATES OR TEMPORARY REGISTRATION                  44811
+1                                     STREET CLEANING                  28712
+2                          RESIDENTIAL PERMIT PARKING                  23683
+3            EXP. METER NON-CENTRAL BUSINESS DISTRICT                  20600
+4                 PARKING/STANDING PROHIBITED ANYTIME                  19753
+5                           EXPIRED METER OR OVERSTAY                  18756
+6                       REAR AND FRONT PLATE REQUIRED                  15829
+7   NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 ...                  14246
+8                                   RUSH HOUR PARKING                  11965
+9                 NO CITY STICKER OR IMPROPER DISPLAY                  10773
+10            EXPIRED METER CENTRAL BUSINESS DISTRICT                   9736
+11                NO STANDING/PARKING TIME RESTRICTED                   8640
+12                         WITHIN 15' OF FIRE HYDRANT                   6104
+13           PARK OR STAND IN BUS/TAXI/CARRIAGE STAND                   6004
+14           TRUCK,RV,BUS, OR TAXI RESIDENTIAL STREET                   4789
+15                   STREET CLEANING OR SPECIAL EVENT                   3370
+16                         DOUBLE PARKING OR STANDING                   2904
+17            EXPIRED PLATE OR TEMPORARY REGISTRATION                   2720
+18                        STOP SIGN OR TRAFFIC SIGNAL                   2191
+19                                PARK OR BLOCK ALLEY                   2050</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<style>
+  #altair-viz-4ddf3f48d3af43f4a7833ddedf19af01.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-4ddf3f48d3af43f4a7833ddedf19af01.vega-embed details,
+  #altair-viz-4ddf3f48d3af43f4a7833ddedf19af01.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-4ddf3f48d3af43f4a7833ddedf19af01"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-4ddf3f48d3af43f4a7833ddedf19af01") {
+      outputDiv = document.getElementById("altair-viz-4ddf3f48d3af43f4a7833ddedf19af01");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}, "axis": {"labelFontSize": 5, "labelLimit": 200, "titleFontSize": 10}}, "data": {"name": "data-2c0c5ac608549c2f4040c6d5a6ccb488"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "frequency", "title": "Frequency", "type": "quantitative"}, "y": {"field": "violation_description", "sort": "-x", "title": "Violation Type", "type": "nominal"}}, "height": 400, "title": "Top 20 Violation Types", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-2c0c5ac608549c2f4040c6d5a6ccb488": [{"violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "frequency": 44811}, {"violation_description": "STREET CLEANING", "frequency": 28712}, {"violation_description": "RESIDENTIAL PERMIT PARKING", "frequency": 23683}, {"violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "frequency": 20600}, {"violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "frequency": 19753}, {"violation_description": "EXPIRED METER OR OVERSTAY", "frequency": 18756}, {"violation_description": "REAR AND FRONT PLATE REQUIRED", "frequency": 15829}, {"violation_description": "NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 LBS.", "frequency": 14246}, {"violation_description": "RUSH HOUR PARKING", "frequency": 11965}, {"violation_description": "NO CITY STICKER OR IMPROPER DISPLAY", "frequency": 10773}, {"violation_description": "EXPIRED METER CENTRAL BUSINESS DISTRICT", "frequency": 9736}, {"violation_description": "NO STANDING/PARKING TIME RESTRICTED", "frequency": 8640}, {"violation_description": "WITHIN 15' OF FIRE HYDRANT", "frequency": 6104}, {"violation_description": "PARK OR STAND IN BUS/TAXI/CARRIAGE STAND", "frequency": 6004}, {"violation_description": "TRUCK,RV,BUS, OR TAXI RESIDENTIAL STREET", "frequency": 4789}, {"violation_description": "STREET CLEANING OR SPECIAL EVENT", "frequency": 3370}, {"violation_description": "DOUBLE PARKING OR STANDING", "frequency": 2904}, {"violation_description": "EXPIRED PLATE OR TEMPORARY REGISTRATION", "frequency": 2720}, {"violation_description": "STOP SIGN OR TRAFFIC SIGNAL", "frequency": 2191}, {"violation_description": "PARK OR BLOCK ALLEY", "frequency": 2050}]}}, {"scaleFactor": 2, "mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="visual-q1" class="level1">
+<h1>Visual Q1</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Variable Name</strong></th>
+<th><strong>Altair Data Type</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unnamed: 0</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>ticket_number</td>
+<td>Ordinal (O) / Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>issue_date</td>
+<td>Temporal (T)</td>
+</tr>
+<tr class="even">
+<td>violation_location</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>license_plate_number</td>
+<td>Ordinal (O) / Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>license_plate_state</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>license_plate_type</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>zipcode</td>
+<td>Ordinal (O) / Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>violation_code</td>
+<td>Ordinal (O) / Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>violation_description</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>unit</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>unit_description</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>vehicle_make</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>fine_level1_amount</td>
+<td>Quantitative (Q)</td>
+</tr>
+<tr class="odd">
+<td>fine_level2_amount</td>
+<td>Quantitative (Q)</td>
+</tr>
+<tr class="even">
+<td>current_amount_due</td>
+<td>Quantitative (Q)</td>
+</tr>
+<tr class="odd">
+<td>total_payments</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>ticket_queue</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>ticket_queue_date</td>
+<td>Temporal (T)</td>
+</tr>
+<tr class="even">
+<td>notice_level</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>hearing_disposition</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>notice_number</td>
+<td>Ordinal (O) / Nominal (N)</td>
+</tr>
+<tr class="odd">
+<td>officer</td>
+<td>Nominal (N)</td>
+</tr>
+<tr class="even">
+<td>address</td>
+<td>Nominal (N)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ticket_number: if it is in time sequence, then it is ordinal; if it is a just unique identifier, then it should be nominal.</li>
+<li>license_plate_number: If the plate number is is time sequence, then it should be ordinal; if it is just random plate number, then it is just nominal.</li>
+<li>zipcode: if the zipcode follow certain geographical order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.</li>
+<li>violation_code: if the violation code follow certain time order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.</li>
+<li>notice_number: if the notice number also follows time order, then it is ordinal; if it is a random number with no meaning, then it should be nominal.</li>
+</ul>
+</section>
+<section id="visual-q2" class="level1">
+<h1>Visual Q2</h1>
+<div id="37b18b4b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'paid'</span>] <span class="op">=</span> df[<span class="st">'current_amount_due'</span>] <span class="op">==</span> <span class="dv">0</span>  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>vehicle_paid <span class="op">=</span> df.groupby(<span class="st">'vehicle_make'</span>)[<span class="st">'paid'</span>].mean().reset_index()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>vehicle_paid.columns <span class="op">=</span> [<span class="st">'Vehicle Make'</span>, <span class="st">'Fraction Paid'</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>vehicle_paid <span class="op">=</span> vehicle_paid.sort_values(by<span class="op">=</span><span class="st">'Fraction Paid'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(vehicle_paid).mark_bar().encode(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'Fraction Paid:Q'</span>, title<span class="op">=</span><span class="st">'Fraction'</span>),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'Vehicle Make:N'</span>, sort<span class="op">=</span><span class="st">'-x'</span>, title<span class="op">=</span><span class="st">'Vehicle Make'</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>, </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">1500</span>, </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Fraction of Payment by Brand"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>chart</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Different auto brands have different prices. More luxury cars' owners have more </span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># financial ability to pay these tickets, while affordable cars may be more </span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># unlikely to pay these tockets due to lower incomes.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<style>
+  #altair-viz-cef76fc6bac44ef18d74e6270a9a7152.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-cef76fc6bac44ef18d74e6270a9a7152.vega-embed details,
+  #altair-viz-cef76fc6bac44ef18d74e6270a9a7152.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-cef76fc6bac44ef18d74e6270a9a7152"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-cef76fc6bac44ef18d74e6270a9a7152") {
+      outputDiv = document.getElementById("altair-viz-cef76fc6bac44ef18d74e6270a9a7152");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-d36b4e747050b09661e498c96d82e920"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Fraction Paid", "title": "Fraction", "type": "quantitative"}, "y": {"field": "Vehicle Make", "sort": "-x", "title": "Vehicle Make", "type": "nominal"}}, "height": 1500, "title": "Fraction of Payment by Brand", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-d36b4e747050b09661e498c96d82e920": [{"Vehicle Make": "ZNEN", "Fraction Paid": 1.0}, {"Vehicle Make": "SYMP", "Fraction Paid": 1.0}, {"Vehicle Make": "LONT", "Fraction Paid": 1.0}, {"Vehicle Make": "MG", "Fraction Paid": 1.0}, {"Vehicle Make": "DERB", "Fraction Paid": 1.0}, {"Vehicle Make": "PACK", "Fraction Paid": 1.0}, {"Vehicle Make": "PEIR", "Fraction Paid": 1.0}, {"Vehicle Make": "PREO", "Fraction Paid": 1.0}, {"Vehicle Make": "BRDL", "Fraction Paid": 1.0}, {"Vehicle Make": "SANY", "Fraction Paid": 1.0}, {"Vehicle Make": "TOMO", "Fraction Paid": 1.0}, {"Vehicle Make": "WILS", "Fraction Paid": 1.0}, {"Vehicle Make": "WHIT", "Fraction Paid": 1.0}, {"Vehicle Make": "ASTO", "Fraction Paid": 1.0}, {"Vehicle Make": "MINI", "Fraction Paid": 0.8964401294498382}, {"Vehicle Make": "ALFA", "Fraction Paid": 0.875}, {"Vehicle Make": "SCIO", "Fraction Paid": 0.8737137511693172}, {"Vehicle Make": "SMRT", "Fraction Paid": 0.8723404255319149}, {"Vehicle Make": "SUBA", "Fraction Paid": 0.8668754894283477}, {"Vehicle Make": "FIAT", "Fraction Paid": 0.8666666666666667}, {"Vehicle Make": "TRIU", "Fraction Paid": 0.8518518518518519}, {"Vehicle Make": "RROV", "Fraction Paid": 0.851145038167939}, {"Vehicle Make": "LEXU", "Fraction Paid": 0.8476135710178263}, {"Vehicle Make": "PORS", "Fraction Paid": 0.8451612903225807}, {"Vehicle Make": "TOYT", "Fraction Paid": 0.8447069796362506}, {"Vehicle Make": "MASE", "Fraction Paid": 0.84}, {"Vehicle Make": "HOND", "Fraction Paid": 0.8371508512353583}, {"Vehicle Make": "VOLK", "Fraction Paid": 0.8323978592872993}, {"Vehicle Make": "AUDI", "Fraction Paid": 0.8320906650760513}, {"Vehicle Make": "SAAB", "Fraction Paid": 0.8304535637149028}, {"Vehicle Make": "ACUR", "Fraction Paid": 0.8287635799275738}, {"Vehicle Make": "VOLV", "Fraction Paid": 0.8272727272727273}, {"Vehicle Make": "BMW", "Fraction Paid": 0.8220380302291566}, {"Vehicle Make": "MERZ", "Fraction Paid": 0.8145563310069791}, {"Vehicle Make": "ROV", "Fraction Paid": 0.8126582278481013}, {"Vehicle Make": "MAZD", "Fraction Paid": 0.8083219645293315}, {"Vehicle Make": "JEEP", "Fraction Paid": 0.8000580383052814}, {"Vehicle Make": "DUCA", "Fraction Paid": 0.8}, {"Vehicle Make": "LOTU", "Fraction Paid": 0.8}, {"Vehicle Make": "HYUN", "Fraction Paid": 0.7859228971962616}, {"Vehicle Make": "INFI", "Fraction Paid": 0.7858262778300408}, {"Vehicle Make": "BENT", "Fraction Paid": 0.7857142857142857}, {"Vehicle Make": "NISS", "Fraction Paid": 0.7854663272390651}, {"Vehicle Make": "MITS", "Fraction Paid": 0.7829965888218315}, {"Vehicle Make": "LNDR", "Fraction Paid": 0.7812187812187812}, {"Vehicle Make": "KIA", "Fraction Paid": 0.7803987643920247}, {"Vehicle Make": "THMP", "Fraction Paid": 0.7777777777777778}, {"Vehicle Make": "PIAG", "Fraction Paid": 0.7777777777777778}, {"Vehicle Make": "HUMM", "Fraction Paid": 0.7777777777777778}, {"Vehicle Make": "SUZI", "Fraction Paid": 0.7751937984496124}, {"Vehicle Make": "GENU", "Fraction Paid": 0.7586206896551724}, {"Vehicle Make": "SATR", "Fraction Paid": 0.7579042457091237}, {"Vehicle Make": "GEO", "Fraction Paid": 0.7557840616966581}, {"Vehicle Make": "APRL", "Fraction Paid": 0.75}, {"Vehicle Make": "DATS", "Fraction Paid": 0.75}, {"Vehicle Make": "SPNT", "Fraction Paid": 0.75}, {"Vehicle Make": "TESL", "Fraction Paid": 0.75}, {"Vehicle Make": "ISU", "Fraction Paid": 0.7395973154362416}, {"Vehicle Make": "JAGU", "Fraction Paid": 0.7387267904509284}, {"Vehicle Make": "PETR", "Fraction Paid": 0.7272727272727273}, {"Vehicle Make": "UNKN", "Fraction Paid": 0.7263157894736842}, {"Vehicle Make": "OTHR", "Fraction Paid": 0.7250996015936255}, {"Vehicle Make": "FORD", "Fraction Paid": 0.7205154175106909}, {"Vehicle Make": "KYMC", "Fraction Paid": 0.7142857142857143}, {"Vehicle Make": "GMC", "Fraction Paid": 0.7022831050228311}, {"Vehicle Make": "HINO", "Fraction Paid": 0.7011494252873564}, {"Vehicle Make": "DAEW", "Fraction Paid": 0.7008547008547008}, {"Vehicle Make": "LAMO", "Fraction Paid": 0.7}, {"Vehicle Make": "INTL", "Fraction Paid": 0.6997549019607843}, {"Vehicle Make": "HARL", "Fraction Paid": 0.696969696969697}, {"Vehicle Make": "CHEV", "Fraction Paid": 0.6891318959722869}, {"Vehicle Make": "CHRY", "Fraction Paid": 0.6868647883699988}, {"Vehicle Make": "FLNR", "Fraction Paid": 0.6853035143769968}, {"Vehicle Make": "DODG", "Fraction Paid": 0.6765022478313176}, {"Vehicle Make": "MERC", "Fraction Paid": 0.6735817104149027}, {"Vehicle Make": "CADI", "Fraction Paid": 0.6706612454526001}, {"Vehicle Make": "YAMA", "Fraction Paid": 0.6691729323308271}, {"Vehicle Make": "ROKE", "Fraction Paid": 0.6666666666666666}, {"Vehicle Make": "RAMB", "Fraction Paid": 0.6666666666666666}, {"Vehicle Make": "AMER", "Fraction Paid": 0.6666666666666666}, {"Vehicle Make": "FTWD", "Fraction Paid": 0.6666666666666666}, {"Vehicle Make": "IND", "Fraction Paid": 0.6666666666666666}, {"Vehicle Make": "LINC", "Fraction Paid": 0.6583215796897038}, {"Vehicle Make": "PONT", "Fraction Paid": 0.6450409463148317}, {"Vehicle Make": "PLYM", "Fraction Paid": 0.6356209150326797}, {"Vehicle Make": "BUIC", "Fraction Paid": 0.6155878467635403}, {"Vehicle Make": "VESP", "Fraction Paid": 0.6153846153846154}, {"Vehicle Make": "FERR", "Fraction Paid": 0.6111111111111112}, {"Vehicle Make": "MACK", "Fraction Paid": 0.6}, {"Vehicle Make": "GELY", "Fraction Paid": 0.6}, {"Vehicle Make": "KENW", "Fraction Paid": 0.6}, {"Vehicle Make": "OLDS", "Fraction Paid": 0.5966422729229445}, {"Vehicle Make": "EGIL", "Fraction Paid": 0.5909090909090909}, {"Vehicle Make": "KAWA", "Fraction Paid": 0.5411764705882353}, {"Vehicle Make": "ROL", "Fraction Paid": 0.5384615384615384}, {"Vehicle Make": "BAJA", "Fraction Paid": 0.5}, {"Vehicle Make": "YUGO", "Fraction Paid": 0.5}, {"Vehicle Make": "VPGP", "Fraction Paid": 0.5}, {"Vehicle Make": "LING", "Fraction Paid": 0.5}, {"Vehicle Make": "AUST", "Fraction Paid": 0.5}, {"Vehicle Make": "STRG", "Fraction Paid": 0.46153846153846156}, {"Vehicle Make": "TRAL", "Fraction Paid": 0.45454545454545453}, {"Vehicle Make": "MERK", "Fraction Paid": 0.42857142857142855}, {"Vehicle Make": "CHEC", "Fraction Paid": 0.41304347826086957}, {"Vehicle Make": "PTRB", "Fraction Paid": 0.4}, {"Vehicle Make": "MILA", "Fraction Paid": 0.3333333333333333}, {"Vehicle Make": "MTCH", "Fraction Paid": 0.3333333333333333}, {"Vehicle Make": "LNCI", "Fraction Paid": 0.3333333333333333}, {"Vehicle Make": "DAIH", "Fraction Paid": 0.3333333333333333}, {"Vehicle Make": "MCIN", "Fraction Paid": 0.3333333333333333}, {"Vehicle Make": "SPEC", "Fraction Paid": 0.3}, {"Vehicle Make": "LCE", "Fraction Paid": 0.2727272727272727}, {"Vehicle Make": "BENE", "Fraction Paid": 0.25}, {"Vehicle Make": "BUEL", "Fraction Paid": 0.25}, {"Vehicle Make": "SCHW", "Fraction Paid": 0.25}, {"Vehicle Make": "POLS", "Fraction Paid": 0.2222222222222222}, {"Vehicle Make": "WORH", "Fraction Paid": 0.2222222222222222}, {"Vehicle Make": "TAOT", "Fraction Paid": 0.0}, {"Vehicle Make": "JMST", "Fraction Paid": 0.0}, {"Vehicle Make": "GUST", "Fraction Paid": 0.0}, {"Vehicle Make": "WSTR", "Fraction Paid": 0.0}, {"Vehicle Make": "HUDS", "Fraction Paid": 0.0}, {"Vehicle Make": "CITR", "Fraction Paid": 0.0}, {"Vehicle Make": "RENU", "Fraction Paid": 0.0}, {"Vehicle Make": "MOGU", "Fraction Paid": 0.0}, {"Vehicle Make": "TAIZ", "Fraction Paid": 0.0}, {"Vehicle Make": "VNTO", "Fraction Paid": 0.0}, {"Vehicle Make": "VIKI", "Fraction Paid": 0.0}, {"Vehicle Make": "VICY", "Fraction Paid": 0.0}, {"Vehicle Make": "ROKW", "Fraction Paid": 0.0}, {"Vehicle Make": "CAP", "Fraction Paid": 0.0}, {"Vehicle Make": "STOU", "Fraction Paid": 0.0}, {"Vehicle Make": "PCNS", "Fraction Paid": 0.0}]}}, {"scaleFactor": 2, "mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="visual-q3" class="level1">
+<h1>Visual Q3</h1>
+<div id="6e8d176f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Month'</span>] <span class="op">=</span> df[<span class="st">'issue_date'</span>].dt.to_period(<span class="st">'M'</span>).astype(<span class="bu">str</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>tickets_over_time <span class="op">=</span> df.groupby(<span class="st">'Month'</span>).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(tickets_over_time).mark_area(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"lightblue"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    interpolate<span class="op">=</span><span class="st">'step-after'</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    line<span class="op">=</span><span class="va">True</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>).encode(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'Month:O'</span>, title<span class="op">=</span><span class="st">'Month'</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'count:Q'</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Number of Tickets Issued Over Time'</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>, </span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>).configure_axis(</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    labelFontSize<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<style>
+  #altair-viz-68d17b58783242908977525c6e3ed43b.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-68d17b58783242908977525c6e3ed43b.vega-embed details,
+  #altair-viz-68d17b58783242908977525c6e3ed43b.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-68d17b58783242908977525c6e3ed43b"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-68d17b58783242908977525c6e3ed43b") {
+      outputDiv = document.getElementById("altair-viz-68d17b58783242908977525c6e3ed43b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}, "axis": {"labelFontSize": 5}}, "data": {"name": "data-e8dd2d5eea933b7000f0b597cd672e93"}, "mark": {"type": "area", "color": "lightblue", "interpolate": "step-after", "line": true}, "encoding": {"x": {"field": "Month", "title": "Month", "type": "ordinal"}, "y": {"field": "count", "type": "quantitative"}}, "height": 600, "title": "Number of Tickets Issued Over Time", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-e8dd2d5eea933b7000f0b597cd672e93": [{"Month": "2007-01", "count": 2480}, {"Month": "2007-02", "count": 1824}, {"Month": "2007-03", "count": 2409}, {"Month": "2007-04", "count": 2553}, {"Month": "2007-05", "count": 2594}, {"Month": "2007-06", "count": 2431}, {"Month": "2007-07", "count": 2700}, {"Month": "2007-08", "count": 2729}, {"Month": "2007-09", "count": 2477}, {"Month": "2007-10", "count": 2675}, {"Month": "2007-11", "count": 2390}, {"Month": "2007-12", "count": 1990}, {"Month": "2008-01", "count": 2254}, {"Month": "2008-02", "count": 2444}, {"Month": "2008-03", "count": 2443}, {"Month": "2008-04", "count": 2652}, {"Month": "2008-05", "count": 2420}, {"Month": "2008-06", "count": 2347}, {"Month": "2008-07", "count": 2588}, {"Month": "2008-08", "count": 2528}, {"Month": "2008-09", "count": 2438}, {"Month": "2008-10", "count": 2588}, {"Month": "2008-11", "count": 2227}, {"Month": "2008-12", "count": 1784}, {"Month": "2009-01", "count": 2055}, {"Month": "2009-02", "count": 2027}, {"Month": "2009-03", "count": 2270}, {"Month": "2009-04", "count": 2724}, {"Month": "2009-05", "count": 2513}, {"Month": "2009-06", "count": 2402}, {"Month": "2009-07", "count": 2504}, {"Month": "2009-08", "count": 2393}, {"Month": "2009-09", "count": 2362}, {"Month": "2009-10", "count": 2340}, {"Month": "2009-11", "count": 2087}, {"Month": "2009-12", "count": 1658}, {"Month": "2010-01", "count": 1934}, {"Month": "2010-02", "count": 1693}, {"Month": "2010-03", "count": 2008}, {"Month": "2010-04", "count": 2099}, {"Month": "2010-05", "count": 2157}, {"Month": "2010-06", "count": 2152}, {"Month": "2010-07", "count": 1986}, {"Month": "2010-08", "count": 2485}, {"Month": "2010-09", "count": 2441}, {"Month": "2010-10", "count": 2388}, {"Month": "2010-11", "count": 2194}, {"Month": "2010-12", "count": 1787}, {"Month": "2011-01", "count": 1968}, {"Month": "2011-02", "count": 1380}, {"Month": "2011-03", "count": 2102}, {"Month": "2011-04", "count": 2257}, {"Month": "2011-05", "count": 2208}, {"Month": "2011-06", "count": 2298}, {"Month": "2011-07", "count": 2355}, {"Month": "2011-08", "count": 2347}, {"Month": "2011-09", "count": 2113}, {"Month": "2011-10", "count": 2141}, {"Month": "2011-11", "count": 1966}, {"Month": "2011-12", "count": 1763}, {"Month": "2012-01", "count": 1676}, {"Month": "2012-02", "count": 1797}, {"Month": "2012-03", "count": 1898}, {"Month": "2012-04", "count": 2054}, {"Month": "2012-05", "count": 1995}, {"Month": "2012-06", "count": 2156}, {"Month": "2012-07", "count": 2305}, {"Month": "2012-08", "count": 2368}, {"Month": "2012-09", "count": 2061}, {"Month": "2012-10", "count": 2274}, {"Month": "2012-11", "count": 2023}, {"Month": "2012-12", "count": 1799}, {"Month": "2013-01", "count": 2117}, {"Month": "2013-02", "count": 1717}, {"Month": "2013-03", "count": 2102}, {"Month": "2013-04", "count": 2383}, {"Month": "2013-05", "count": 2260}, {"Month": "2013-06", "count": 2133}, {"Month": "2013-07", "count": 2543}, {"Month": "2013-08", "count": 2496}, {"Month": "2013-09", "count": 2191}, {"Month": "2013-10", "count": 2311}, {"Month": "2013-11", "count": 1997}, {"Month": "2013-12", "count": 1733}, {"Month": "2014-01", "count": 1732}, {"Month": "2014-02", "count": 1785}, {"Month": "2014-03", "count": 2136}, {"Month": "2014-04", "count": 2372}, {"Month": "2014-05", "count": 2244}, {"Month": "2014-06", "count": 2169}, {"Month": "2014-07", "count": 2184}, {"Month": "2014-08", "count": 2145}, {"Month": "2014-09", "count": 2100}, {"Month": "2014-10", "count": 2170}, {"Month": "2014-11", "count": 1795}, {"Month": "2014-12", "count": 1720}, {"Month": "2015-01", "count": 1786}, {"Month": "2015-02", "count": 1378}, {"Month": "2015-03", "count": 1929}, {"Month": "2015-04", "count": 2145}, {"Month": "2015-05", "count": 2134}, {"Month": "2015-06", "count": 2251}, {"Month": "2015-07", "count": 2279}, {"Month": "2015-08", "count": 2197}, {"Month": "2015-09", "count": 2182}, {"Month": "2015-10", "count": 2222}, {"Month": "2015-11", "count": 1935}, {"Month": "2015-12", "count": 1789}, {"Month": "2016-01", "count": 1773}, {"Month": "2016-02", "count": 1609}, {"Month": "2016-03", "count": 1793}, {"Month": "2016-04", "count": 2097}, {"Month": "2016-05", "count": 2059}, {"Month": "2016-06", "count": 2013}, {"Month": "2016-07", "count": 1865}, {"Month": "2016-08", "count": 2037}, {"Month": "2016-09", "count": 1901}, {"Month": "2016-10", "count": 2089}, {"Month": "2016-11", "count": 1883}, {"Month": "2016-12", "count": 1524}, {"Month": "2017-01", "count": 1865}, {"Month": "2017-02", "count": 1604}, {"Month": "2017-03", "count": 1770}, {"Month": "2017-04", "count": 1925}, {"Month": "2017-05", "count": 2010}, {"Month": "2017-06", "count": 1995}, {"Month": "2017-07", "count": 1975}, {"Month": "2017-08", "count": 1993}, {"Month": "2017-09", "count": 2015}, {"Month": "2017-10", "count": 1952}, {"Month": "2017-11", "count": 1816}, {"Month": "2017-12", "count": 1444}, {"Month": "2018-01", "count": 1675}, {"Month": "2018-02", "count": 1384}, {"Month": "2018-03", "count": 1865}, {"Month": "2018-04", "count": 1996}, {"Month": "2018-05", "count": 841}]}}, {"scaleFactor": 2, "mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="visual-q4" class="level1">
+<h1>Visual Q4</h1>
+<div id="03a3f68e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month'</span>] <span class="op">=</span> df[<span class="st">'issue_date'</span>].dt.month</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'day'</span>] <span class="op">=</span> df[<span class="st">'issue_date'</span>].dt.day</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>tickets_by_month_day <span class="op">=</span> df.groupby([<span class="st">'month'</span>, <span class="st">'day'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>heatmap <span class="op">=</span> alt.Chart(tickets_by_month_day).mark_rect().encode(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'day:O'</span>, title<span class="op">=</span><span class="st">'Day'</span>), </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'month:O'</span>, title<span class="op">=</span><span class="st">'Month'</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'count:Q'</span>, title<span class="op">=</span><span class="st">'Ticket Count'</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Number of Tickets Issued by Month and Day'</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>heatmap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<style>
+  #altair-viz-06b005adc64440acb1e42b129aad61d0.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-06b005adc64440acb1e42b129aad61d0.vega-embed details,
+  #altair-viz-06b005adc64440acb1e42b129aad61d0.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-06b005adc64440acb1e42b129aad61d0"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-06b005adc64440acb1e42b129aad61d0") {
+      outputDiv = document.getElementById("altair-viz-06b005adc64440acb1e42b129aad61d0");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-353cd408cf3de2c47e901fec8646a6bf"}, "mark": {"type": "rect"}, "encoding": {"color": {"field": "count", "title": "Ticket Count", "type": "quantitative"}, "x": {"field": "day", "title": "Day", "type": "ordinal"}, "y": {"field": "month", "title": "Month", "type": "ordinal"}}, "height": 300, "title": "Number of Tickets Issued by Month and Day", "width": 500, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-353cd408cf3de2c47e901fec8646a6bf": [{"month": 1, "day": 1, "count": 559}, {"month": 1, "day": 2, "count": 780}, {"month": 1, "day": 3, "count": 860}, {"month": 1, "day": 4, "count": 876}, {"month": 1, "day": 5, "count": 836}, {"month": 1, "day": 6, "count": 710}, {"month": 1, "day": 7, "count": 704}, {"month": 1, "day": 8, "count": 769}, {"month": 1, "day": 9, "count": 781}, {"month": 1, "day": 10, "count": 850}, {"month": 1, "day": 11, "count": 812}, {"month": 1, "day": 12, "count": 846}, {"month": 1, "day": 13, "count": 754}, {"month": 1, "day": 14, "count": 749}, {"month": 1, "day": 15, "count": 770}, {"month": 1, "day": 16, "count": 677}, {"month": 1, "day": 17, "count": 719}, {"month": 1, "day": 18, "count": 708}, {"month": 1, "day": 19, "count": 734}, {"month": 1, "day": 20, "count": 677}, {"month": 1, "day": 21, "count": 697}, {"month": 1, "day": 22, "count": 746}, {"month": 1, "day": 23, "count": 740}, {"month": 1, "day": 24, "count": 709}, {"month": 1, "day": 25, "count": 802}, {"month": 1, "day": 26, "count": 738}, {"month": 1, "day": 27, "count": 703}, {"month": 1, "day": 28, "count": 749}, {"month": 1, "day": 29, "count": 766}, {"month": 1, "day": 30, "count": 786}, {"month": 1, "day": 31, "count": 708}, {"month": 2, "day": 1, "count": 731}, {"month": 2, "day": 2, "count": 672}, {"month": 2, "day": 3, "count": 742}, {"month": 2, "day": 4, "count": 664}, {"month": 2, "day": 5, "count": 690}, {"month": 2, "day": 6, "count": 658}, {"month": 2, "day": 7, "count": 714}, {"month": 2, "day": 8, "count": 784}, {"month": 2, "day": 9, "count": 692}, {"month": 2, "day": 10, "count": 695}, {"month": 2, "day": 11, "count": 732}, {"month": 2, "day": 12, "count": 500}, {"month": 2, "day": 13, "count": 694}, {"month": 2, "day": 14, "count": 672}, {"month": 2, "day": 15, "count": 660}, {"month": 2, "day": 16, "count": 733}, {"month": 2, "day": 17, "count": 653}, {"month": 2, "day": 18, "count": 845}, {"month": 2, "day": 19, "count": 768}, {"month": 2, "day": 20, "count": 755}, {"month": 2, "day": 21, "count": 731}, {"month": 2, "day": 22, "count": 800}, {"month": 2, "day": 23, "count": 838}, {"month": 2, "day": 24, "count": 782}, {"month": 2, "day": 25, "count": 861}, {"month": 2, "day": 26, "count": 746}, {"month": 2, "day": 27, "count": 770}, {"month": 2, "day": 28, "count": 838}, {"month": 2, "day": 29, "count": 222}, {"month": 3, "day": 1, "count": 835}, {"month": 3, "day": 2, "count": 837}, {"month": 3, "day": 3, "count": 861}, {"month": 3, "day": 4, "count": 846}, {"month": 3, "day": 5, "count": 708}, {"month": 3, "day": 6, "count": 823}, {"month": 3, "day": 7, "count": 759}, {"month": 3, "day": 8, "count": 857}, {"month": 3, "day": 9, "count": 864}, {"month": 3, "day": 10, "count": 856}, {"month": 3, "day": 11, "count": 821}, {"month": 3, "day": 12, "count": 821}, {"month": 3, "day": 13, "count": 792}, {"month": 3, "day": 14, "count": 791}, {"month": 3, "day": 15, "count": 779}, {"month": 3, "day": 16, "count": 799}, {"month": 3, "day": 17, "count": 828}, {"month": 3, "day": 18, "count": 798}, {"month": 3, "day": 19, "count": 821}, {"month": 3, "day": 20, "count": 790}, {"month": 3, "day": 21, "count": 757}, {"month": 3, "day": 22, "count": 721}, {"month": 3, "day": 23, "count": 712}, {"month": 3, "day": 24, "count": 768}, {"month": 3, "day": 25, "count": 733}, {"month": 3, "day": 26, "count": 821}, {"month": 3, "day": 27, "count": 797}, {"month": 3, "day": 28, "count": 818}, {"month": 3, "day": 29, "count": 709}, {"month": 3, "day": 30, "count": 800}, {"month": 3, "day": 31, "count": 803}, {"month": 4, "day": 1, "count": 1031}, {"month": 4, "day": 2, "count": 1019}, {"month": 4, "day": 3, "count": 999}, {"month": 4, "day": 4, "count": 976}, {"month": 4, "day": 5, "count": 897}, {"month": 4, "day": 6, "count": 930}, {"month": 4, "day": 7, "count": 938}, {"month": 4, "day": 8, "count": 912}, {"month": 4, "day": 9, "count": 1017}, {"month": 4, "day": 10, "count": 919}, {"month": 4, "day": 11, "count": 950}, {"month": 4, "day": 12, "count": 828}, {"month": 4, "day": 13, "count": 903}, {"month": 4, "day": 14, "count": 829}, {"month": 4, "day": 15, "count": 893}, {"month": 4, "day": 16, "count": 948}, {"month": 4, "day": 17, "count": 1008}, {"month": 4, "day": 18, "count": 874}, {"month": 4, "day": 19, "count": 830}, {"month": 4, "day": 20, "count": 882}, {"month": 4, "day": 21, "count": 922}, {"month": 4, "day": 22, "count": 843}, {"month": 4, "day": 23, "count": 979}, {"month": 4, "day": 24, "count": 857}, {"month": 4, "day": 25, "count": 848}, {"month": 4, "day": 26, "count": 774}, {"month": 4, "day": 27, "count": 850}, {"month": 4, "day": 28, "count": 836}, {"month": 4, "day": 29, "count": 870}, {"month": 4, "day": 30, "count": 895}, {"month": 5, "day": 1, "count": 974}, {"month": 5, "day": 2, "count": 969}, {"month": 5, "day": 3, "count": 902}, {"month": 5, "day": 4, "count": 865}, {"month": 5, "day": 5, "count": 930}, {"month": 5, "day": 6, "count": 864}, {"month": 5, "day": 7, "count": 951}, {"month": 5, "day": 8, "count": 937}, {"month": 5, "day": 9, "count": 835}, {"month": 5, "day": 10, "count": 802}, {"month": 5, "day": 11, "count": 867}, {"month": 5, "day": 12, "count": 841}, {"month": 5, "day": 13, "count": 865}, {"month": 5, "day": 14, "count": 868}, {"month": 5, "day": 15, "count": 749}, {"month": 5, "day": 16, "count": 847}, {"month": 5, "day": 17, "count": 793}, {"month": 5, "day": 18, "count": 827}, {"month": 5, "day": 19, "count": 766}, {"month": 5, "day": 20, "count": 851}, {"month": 5, "day": 21, "count": 803}, {"month": 5, "day": 22, "count": 814}, {"month": 5, "day": 23, "count": 766}, {"month": 5, "day": 24, "count": 725}, {"month": 5, "day": 25, "count": 700}, {"month": 5, "day": 26, "count": 710}, {"month": 5, "day": 27, "count": 749}, {"month": 5, "day": 28, "count": 745}, {"month": 5, "day": 29, "count": 755}, {"month": 5, "day": 30, "count": 734}, {"month": 5, "day": 31, "count": 631}, {"month": 6, "day": 1, "count": 931}, {"month": 6, "day": 2, "count": 927}, {"month": 6, "day": 3, "count": 914}, {"month": 6, "day": 4, "count": 887}, {"month": 6, "day": 5, "count": 864}, {"month": 6, "day": 6, "count": 862}, {"month": 6, "day": 7, "count": 810}, {"month": 6, "day": 8, "count": 805}, {"month": 6, "day": 9, "count": 851}, {"month": 6, "day": 10, "count": 813}, {"month": 6, "day": 11, "count": 836}, {"month": 6, "day": 12, "count": 821}, {"month": 6, "day": 13, "count": 835}, {"month": 6, "day": 14, "count": 736}, {"month": 6, "day": 15, "count": 760}, {"month": 6, "day": 16, "count": 859}, {"month": 6, "day": 17, "count": 747}, {"month": 6, "day": 18, "count": 801}, {"month": 6, "day": 19, "count": 773}, {"month": 6, "day": 20, "count": 778}, {"month": 6, "day": 21, "count": 678}, {"month": 6, "day": 22, "count": 803}, {"month": 6, "day": 23, "count": 825}, {"month": 6, "day": 24, "count": 792}, {"month": 6, "day": 25, "count": 808}, {"month": 6, "day": 26, "count": 798}, {"month": 6, "day": 27, "count": 770}, {"month": 6, "day": 28, "count": 729}, {"month": 6, "day": 29, "count": 750}, {"month": 6, "day": 30, "count": 784}, {"month": 7, "day": 1, "count": 950}, {"month": 7, "day": 2, "count": 947}, {"month": 7, "day": 3, "count": 776}, {"month": 7, "day": 4, "count": 400}, {"month": 7, "day": 5, "count": 641}, {"month": 7, "day": 6, "count": 783}, {"month": 7, "day": 7, "count": 804}, {"month": 7, "day": 8, "count": 829}, {"month": 7, "day": 9, "count": 803}, {"month": 7, "day": 10, "count": 777}, {"month": 7, "day": 11, "count": 766}, {"month": 7, "day": 12, "count": 719}, {"month": 7, "day": 13, "count": 765}, {"month": 7, "day": 14, "count": 823}, {"month": 7, "day": 15, "count": 794}, {"month": 7, "day": 16, "count": 1008}, {"month": 7, "day": 17, "count": 992}, {"month": 7, "day": 18, "count": 916}, {"month": 7, "day": 19, "count": 865}, {"month": 7, "day": 20, "count": 847}, {"month": 7, "day": 21, "count": 819}, {"month": 7, "day": 22, "count": 866}, {"month": 7, "day": 23, "count": 824}, {"month": 7, "day": 24, "count": 874}, {"month": 7, "day": 25, "count": 857}, {"month": 7, "day": 26, "count": 781}, {"month": 7, "day": 27, "count": 787}, {"month": 7, "day": 28, "count": 788}, {"month": 7, "day": 29, "count": 824}, {"month": 7, "day": 30, "count": 852}, {"month": 7, "day": 31, "count": 807}, {"month": 8, "day": 1, "count": 945}, {"month": 8, "day": 2, "count": 896}, {"month": 8, "day": 3, "count": 924}, {"month": 8, "day": 4, "count": 837}, {"month": 8, "day": 5, "count": 879}, {"month": 8, "day": 6, "count": 860}, {"month": 8, "day": 7, "count": 857}, {"month": 8, "day": 8, "count": 838}, {"month": 8, "day": 9, "count": 797}, {"month": 8, "day": 10, "count": 825}, {"month": 8, "day": 11, "count": 849}, {"month": 8, "day": 12, "count": 787}, {"month": 8, "day": 13, "count": 847}, {"month": 8, "day": 14, "count": 852}, {"month": 8, "day": 15, "count": 838}, {"month": 8, "day": 16, "count": 762}, {"month": 8, "day": 17, "count": 811}, {"month": 8, "day": 18, "count": 818}, {"month": 8, "day": 19, "count": 841}, {"month": 8, "day": 20, "count": 824}, {"month": 8, "day": 21, "count": 835}, {"month": 8, "day": 22, "count": 770}, {"month": 8, "day": 23, "count": 755}, {"month": 8, "day": 24, "count": 805}, {"month": 8, "day": 25, "count": 829}, {"month": 8, "day": 26, "count": 798}, {"month": 8, "day": 27, "count": 814}, {"month": 8, "day": 28, "count": 876}, {"month": 8, "day": 29, "count": 823}, {"month": 8, "day": 30, "count": 770}, {"month": 8, "day": 31, "count": 756}, {"month": 9, "day": 1, "count": 876}, {"month": 9, "day": 2, "count": 841}, {"month": 9, "day": 3, "count": 827}, {"month": 9, "day": 4, "count": 842}, {"month": 9, "day": 5, "count": 729}, {"month": 9, "day": 6, "count": 790}, {"month": 9, "day": 7, "count": 737}, {"month": 9, "day": 8, "count": 835}, {"month": 9, "day": 9, "count": 846}, {"month": 9, "day": 10, "count": 823}, {"month": 9, "day": 11, "count": 855}, {"month": 9, "day": 12, "count": 809}, {"month": 9, "day": 13, "count": 756}, {"month": 9, "day": 14, "count": 790}, {"month": 9, "day": 15, "count": 807}, {"month": 9, "day": 16, "count": 805}, {"month": 9, "day": 17, "count": 841}, {"month": 9, "day": 18, "count": 762}, {"month": 9, "day": 19, "count": 842}, {"month": 9, "day": 20, "count": 790}, {"month": 9, "day": 21, "count": 795}, {"month": 9, "day": 22, "count": 809}, {"month": 9, "day": 23, "count": 807}, {"month": 9, "day": 24, "count": 798}, {"month": 9, "day": 25, "count": 874}, {"month": 9, "day": 26, "count": 811}, {"month": 9, "day": 27, "count": 772}, {"month": 9, "day": 28, "count": 795}, {"month": 9, "day": 29, "count": 819}, {"month": 9, "day": 30, "count": 798}, {"month": 10, "day": 1, "count": 1059}, {"month": 10, "day": 2, "count": 925}, {"month": 10, "day": 3, "count": 882}, {"month": 10, "day": 4, "count": 826}, {"month": 10, "day": 5, "count": 902}, {"month": 10, "day": 6, "count": 825}, {"month": 10, "day": 7, "count": 817}, {"month": 10, "day": 8, "count": 758}, {"month": 10, "day": 9, "count": 789}, {"month": 10, "day": 10, "count": 722}, {"month": 10, "day": 11, "count": 731}, {"month": 10, "day": 12, "count": 716}, {"month": 10, "day": 13, "count": 762}, {"month": 10, "day": 14, "count": 793}, {"month": 10, "day": 15, "count": 856}, {"month": 10, "day": 16, "count": 858}, {"month": 10, "day": 17, "count": 818}, {"month": 10, "day": 18, "count": 814}, {"month": 10, "day": 19, "count": 834}, {"month": 10, "day": 20, "count": 830}, {"month": 10, "day": 21, "count": 871}, {"month": 10, "day": 22, "count": 827}, {"month": 10, "day": 23, "count": 757}, {"month": 10, "day": 24, "count": 817}, {"month": 10, "day": 25, "count": 746}, {"month": 10, "day": 26, "count": 755}, {"month": 10, "day": 27, "count": 801}, {"month": 10, "day": 28, "count": 781}, {"month": 10, "day": 29, "count": 819}, {"month": 10, "day": 30, "count": 775}, {"month": 10, "day": 31, "count": 684}, {"month": 11, "day": 1, "count": 929}, {"month": 11, "day": 2, "count": 892}, {"month": 11, "day": 3, "count": 922}, {"month": 11, "day": 4, "count": 786}, {"month": 11, "day": 5, "count": 846}, {"month": 11, "day": 6, "count": 834}, {"month": 11, "day": 7, "count": 818}, {"month": 11, "day": 8, "count": 757}, {"month": 11, "day": 9, "count": 807}, {"month": 11, "day": 10, "count": 808}, {"month": 11, "day": 11, "count": 538}, {"month": 11, "day": 12, "count": 766}, {"month": 11, "day": 13, "count": 818}, {"month": 11, "day": 14, "count": 827}, {"month": 11, "day": 15, "count": 766}, {"month": 11, "day": 16, "count": 837}, {"month": 11, "day": 17, "count": 779}, {"month": 11, "day": 18, "count": 760}, {"month": 11, "day": 19, "count": 835}, {"month": 11, "day": 20, "count": 727}, {"month": 11, "day": 21, "count": 749}, {"month": 11, "day": 22, "count": 569}, {"month": 11, "day": 23, "count": 656}, {"month": 11, "day": 24, "count": 600}, {"month": 11, "day": 25, "count": 631}, {"month": 11, "day": 26, "count": 563}, {"month": 11, "day": 27, "count": 542}, {"month": 11, "day": 28, "count": 612}, {"month": 11, "day": 29, "count": 655}, {"month": 11, "day": 30, "count": 684}, {"month": 12, "day": 1, "count": 888}, {"month": 12, "day": 2, "count": 846}, {"month": 12, "day": 3, "count": 829}, {"month": 12, "day": 4, "count": 760}, {"month": 12, "day": 5, "count": 717}, {"month": 12, "day": 6, "count": 677}, {"month": 12, "day": 7, "count": 704}, {"month": 12, "day": 8, "count": 682}, {"month": 12, "day": 9, "count": 643}, {"month": 12, "day": 10, "count": 728}, {"month": 12, "day": 11, "count": 670}, {"month": 12, "day": 12, "count": 611}, {"month": 12, "day": 13, "count": 620}, {"month": 12, "day": 14, "count": 644}, {"month": 12, "day": 15, "count": 576}, {"month": 12, "day": 16, "count": 642}, {"month": 12, "day": 17, "count": 607}, {"month": 12, "day": 18, "count": 621}, {"month": 12, "day": 19, "count": 548}, {"month": 12, "day": 20, "count": 614}, {"month": 12, "day": 21, "count": 566}, {"month": 12, "day": 22, "count": 547}, {"month": 12, "day": 23, "count": 534}, {"month": 12, "day": 24, "count": 444}, {"month": 12, "day": 25, "count": 165}, {"month": 12, "day": 26, "count": 434}, {"month": 12, "day": 27, "count": 532}, {"month": 12, "day": 28, "count": 517}, {"month": 12, "day": 29, "count": 578}, {"month": 12, "day": 30, "count": 520}, {"month": 12, "day": 31, "count": 527}]}}, {"scaleFactor": 2, "mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="visual-q5" class="level1">
+<h1>Visual Q5</h1>
+<div id="675d1cd4" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'issue_date'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'issue_date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>top_violations <span class="op">=</span> df[<span class="st">'violation_description'</span>].value_counts().nlargest(<span class="dv">5</span>).index</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df_top_violations <span class="op">=</span> df[df[<span class="st">'violation_description'</span>].isin(top_violations)]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>df_top_violations[<span class="st">'month'</span>] <span class="op">=</span> df_top_violations[<span class="st">'issue_date'</span>].dt.to_period(<span class="st">'M'</span>).astype(<span class="bu">str</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>tickets_over_time <span class="op">=</span> df_top_violations.groupby([<span class="st">'month'</span>, <span class="st">'violation_description'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(tickets_over_time).mark_rect().encode(</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'month:O'</span>, title<span class="op">=</span><span class="st">'Month'</span>, axis<span class="op">=</span>alt.Axis(labelAngle<span class="op">=</span><span class="dv">45</span>)),</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'violation_description:N'</span>, title<span class="op">=</span><span class="st">'Violation Type'</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'count:Q'</span>, title<span class="op">=</span><span class="st">'Ticket Count'</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>).properties(</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Number of Tickets Issued by Type'</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>).configure_axis(</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    labelFontSize<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/k2/prgbv7z97knbd104r93pncfc0000gp/T/ipykernel_44096/561639984.py:10: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_top_violations['month'] = df_top_violations['issue_date'].dt.to_period('M').astype(str)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<style>
+  #altair-viz-c5dae57c585a4092a54ddced73edf361.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-c5dae57c585a4092a54ddced73edf361.vega-embed details,
+  #altair-viz-c5dae57c585a4092a54ddced73edf361.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-c5dae57c585a4092a54ddced73edf361"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-c5dae57c585a4092a54ddced73edf361") {
+      outputDiv = document.getElementById("altair-viz-c5dae57c585a4092a54ddced73edf361");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}, "axis": {"labelFontSize": 5}}, "data": {"name": "data-7445dbe07455c2f84c9f1adcfe6987f7"}, "mark": {"type": "rect"}, "encoding": {"color": {"field": "count", "title": "Ticket Count", "type": "quantitative"}, "x": {"axis": {"labelAngle": 45}, "field": "month", "title": "Month", "type": "ordinal"}, "y": {"field": "violation_description", "title": "Violation Type", "type": "nominal"}}, "height": 600, "title": "Number of Tickets Issued by Type", "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-7445dbe07455c2f84c9f1adcfe6987f7": [{"month": "2007-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 285}, {"month": "2007-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 458}, {"month": "2007-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 232}, {"month": "2007-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 247}, {"month": "2007-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 222}, {"month": "2007-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 237}, {"month": "2007-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 203}, {"month": "2007-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2007-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 288}, {"month": "2007-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 341}, {"month": "2007-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 228}, {"month": "2007-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 280}, {"month": "2007-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 251}, {"month": "2007-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 323}, {"month": "2007-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 180}, {"month": "2007-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 220}, {"month": "2007-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 255}, {"month": "2007-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 358}, {"month": "2007-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 215}, {"month": "2007-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 231}, {"month": "2007-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 274}, {"month": "2007-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 345}, {"month": "2007-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 216}, {"month": "2007-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 198}, {"month": "2007-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 221}, {"month": "2007-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 349}, {"month": "2007-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 193}, {"month": "2007-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 233}, {"month": "2007-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 258}, {"month": "2007-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 316}, {"month": "2007-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 206}, {"month": "2007-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 236}, {"month": "2007-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 235}, {"month": "2007-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 369}, {"month": "2007-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 177}, {"month": "2007-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 239}, {"month": "2007-09", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2007-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 237}, {"month": "2007-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 373}, {"month": "2007-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 194}, {"month": "2007-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 249}, {"month": "2007-10", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2007-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 238}, {"month": "2007-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 339}, {"month": "2007-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 200}, {"month": "2007-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 228}, {"month": "2007-11", "violation_description": "STREET CLEANING", "count": 9}, {"month": "2007-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 307}, {"month": "2007-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 352}, {"month": "2007-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 162}, {"month": "2007-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 187}, {"month": "2007-12", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2008-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 288}, {"month": "2008-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 495}, {"month": "2008-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 175}, {"month": "2008-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 184}, {"month": "2008-01", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2008-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 143}, {"month": "2008-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 352}, {"month": "2008-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 242}, {"month": "2008-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 201}, {"month": "2008-02", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2008-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 1}, {"month": "2008-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 345}, {"month": "2008-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 235}, {"month": "2008-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 250}, {"month": "2008-03", "violation_description": "STREET CLEANING", "count": 5}, {"month": "2008-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 388}, {"month": "2008-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 197}, {"month": "2008-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 226}, {"month": "2008-04", "violation_description": "STREET CLEANING", "count": 562}, {"month": "2008-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 359}, {"month": "2008-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 171}, {"month": "2008-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 186}, {"month": "2008-05", "violation_description": "STREET CLEANING", "count": 480}, {"month": "2008-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 347}, {"month": "2008-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 156}, {"month": "2008-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2008-06", "violation_description": "STREET CLEANING", "count": 463}, {"month": "2008-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 356}, {"month": "2008-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 159}, {"month": "2008-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 194}, {"month": "2008-07", "violation_description": "STREET CLEANING", "count": 409}, {"month": "2008-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 363}, {"month": "2008-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 167}, {"month": "2008-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 239}, {"month": "2008-08", "violation_description": "STREET CLEANING", "count": 348}, {"month": "2008-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 366}, {"month": "2008-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 158}, {"month": "2008-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 214}, {"month": "2008-09", "violation_description": "STREET CLEANING", "count": 363}, {"month": "2008-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 407}, {"month": "2008-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 153}, {"month": "2008-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 224}, {"month": "2008-10", "violation_description": "STREET CLEANING", "count": 411}, {"month": "2008-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 393}, {"month": "2008-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 155}, {"month": "2008-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 203}, {"month": "2008-11", "violation_description": "STREET CLEANING", "count": 212}, {"month": "2008-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 372}, {"month": "2008-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 136}, {"month": "2008-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 150}, {"month": "2009-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 497}, {"month": "2009-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 182}, {"month": "2009-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 183}, {"month": "2009-01", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2009-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 349}, {"month": "2009-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 183}, {"month": "2009-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 180}, {"month": "2009-02", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2009-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 383}, {"month": "2009-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 161}, {"month": "2009-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 236}, {"month": "2009-03", "violation_description": "STREET CLEANING", "count": 3}, {"month": "2009-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 366}, {"month": "2009-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 178}, {"month": "2009-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 214}, {"month": "2009-04", "violation_description": "STREET CLEANING", "count": 416}, {"month": "2009-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 343}, {"month": "2009-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 182}, {"month": "2009-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 249}, {"month": "2009-05", "violation_description": "STREET CLEANING", "count": 336}, {"month": "2009-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 419}, {"month": "2009-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 183}, {"month": "2009-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 183}, {"month": "2009-06", "violation_description": "STREET CLEANING", "count": 350}, {"month": "2009-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 378}, {"month": "2009-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 158}, {"month": "2009-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 147}, {"month": "2009-07", "violation_description": "STREET CLEANING", "count": 324}, {"month": "2009-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 382}, {"month": "2009-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 136}, {"month": "2009-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 202}, {"month": "2009-08", "violation_description": "STREET CLEANING", "count": 301}, {"month": "2009-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 399}, {"month": "2009-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 158}, {"month": "2009-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 213}, {"month": "2009-09", "violation_description": "STREET CLEANING", "count": 322}, {"month": "2009-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 375}, {"month": "2009-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 155}, {"month": "2009-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 194}, {"month": "2009-10", "violation_description": "STREET CLEANING", "count": 362}, {"month": "2009-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 353}, {"month": "2009-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 142}, {"month": "2009-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 174}, {"month": "2009-11", "violation_description": "STREET CLEANING", "count": 209}, {"month": "2009-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 360}, {"month": "2009-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 124}, {"month": "2009-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 160}, {"month": "2009-12", "violation_description": "STREET CLEANING", "count": 3}, {"month": "2010-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 481}, {"month": "2010-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 142}, {"month": "2010-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 148}, {"month": "2010-01", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2010-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 283}, {"month": "2010-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 145}, {"month": "2010-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 159}, {"month": "2010-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 331}, {"month": "2010-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 159}, {"month": "2010-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 203}, {"month": "2010-03", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2010-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 283}, {"month": "2010-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 134}, {"month": "2010-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 189}, {"month": "2010-04", "violation_description": "STREET CLEANING", "count": 385}, {"month": "2010-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 325}, {"month": "2010-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 124}, {"month": "2010-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 212}, {"month": "2010-05", "violation_description": "STREET CLEANING", "count": 348}, {"month": "2010-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 366}, {"month": "2010-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 142}, {"month": "2010-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 196}, {"month": "2010-06", "violation_description": "STREET CLEANING", "count": 378}, {"month": "2010-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 349}, {"month": "2010-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 130}, {"month": "2010-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 57}, {"month": "2010-07", "violation_description": "STREET CLEANING", "count": 306}, {"month": "2010-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 323}, {"month": "2010-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 105}, {"month": "2010-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 192}, {"month": "2010-08", "violation_description": "STREET CLEANING", "count": 355}, {"month": "2010-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 362}, {"month": "2010-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 132}, {"month": "2010-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 191}, {"month": "2010-09", "violation_description": "STREET CLEANING", "count": 363}, {"month": "2010-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 393}, {"month": "2010-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 144}, {"month": "2010-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 186}, {"month": "2010-10", "violation_description": "STREET CLEANING", "count": 312}, {"month": "2010-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 391}, {"month": "2010-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 166}, {"month": "2010-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 166}, {"month": "2010-11", "violation_description": "STREET CLEANING", "count": 211}, {"month": "2010-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 367}, {"month": "2010-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 105}, {"month": "2010-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 151}, {"month": "2010-12", "violation_description": "STREET CLEANING", "count": 3}, {"month": "2011-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 481}, {"month": "2011-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 114}, {"month": "2011-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 162}, {"month": "2011-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 253}, {"month": "2011-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 128}, {"month": "2011-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 90}, {"month": "2011-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 396}, {"month": "2011-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 148}, {"month": "2011-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 166}, {"month": "2011-03", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2011-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 344}, {"month": "2011-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 128}, {"month": "2011-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 183}, {"month": "2011-04", "violation_description": "STREET CLEANING", "count": 412}, {"month": "2011-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 347}, {"month": "2011-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 157}, {"month": "2011-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 157}, {"month": "2011-05", "violation_description": "STREET CLEANING", "count": 367}, {"month": "2011-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 417}, {"month": "2011-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 156}, {"month": "2011-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 164}, {"month": "2011-06", "violation_description": "STREET CLEANING", "count": 405}, {"month": "2011-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 368}, {"month": "2011-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 139}, {"month": "2011-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 158}, {"month": "2011-07", "violation_description": "STREET CLEANING", "count": 375}, {"month": "2011-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 352}, {"month": "2011-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 124}, {"month": "2011-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 173}, {"month": "2011-08", "violation_description": "STREET CLEANING", "count": 403}, {"month": "2011-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 318}, {"month": "2011-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 133}, {"month": "2011-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 165}, {"month": "2011-09", "violation_description": "STREET CLEANING", "count": 351}, {"month": "2011-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 330}, {"month": "2011-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 129}, {"month": "2011-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 175}, {"month": "2011-10", "violation_description": "STREET CLEANING", "count": 349}, {"month": "2011-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 374}, {"month": "2011-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 105}, {"month": "2011-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 159}, {"month": "2011-11", "violation_description": "STREET CLEANING", "count": 146}, {"month": "2011-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 365}, {"month": "2011-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 132}, {"month": "2011-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 156}, {"month": "2012-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 396}, {"month": "2012-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 110}, {"month": "2012-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 118}, {"month": "2012-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 39}, {"month": "2012-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 304}, {"month": "2012-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 136}, {"month": "2012-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 142}, {"month": "2012-02", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2012-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 327}, {"month": "2012-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 298}, {"month": "2012-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 155}, {"month": "2012-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 189}, {"month": "2012-03", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2012-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 283}, {"month": "2012-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 273}, {"month": "2012-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 122}, {"month": "2012-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 207}, {"month": "2012-04", "violation_description": "STREET CLEANING", "count": 396}, {"month": "2012-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 257}, {"month": "2012-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 292}, {"month": "2012-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 122}, {"month": "2012-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 182}, {"month": "2012-05", "violation_description": "STREET CLEANING", "count": 387}, {"month": "2012-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 302}, {"month": "2012-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 319}, {"month": "2012-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 150}, {"month": "2012-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 185}, {"month": "2012-06", "violation_description": "STREET CLEANING", "count": 383}, {"month": "2012-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 272}, {"month": "2012-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 320}, {"month": "2012-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 126}, {"month": "2012-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 143}, {"month": "2012-07", "violation_description": "STREET CLEANING", "count": 377}, {"month": "2012-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 321}, {"month": "2012-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 312}, {"month": "2012-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 116}, {"month": "2012-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 155}, {"month": "2012-08", "violation_description": "STREET CLEANING", "count": 411}, {"month": "2012-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 292}, {"month": "2012-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 301}, {"month": "2012-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 137}, {"month": "2012-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 165}, {"month": "2012-09", "violation_description": "STREET CLEANING", "count": 330}, {"month": "2012-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 306}, {"month": "2012-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 324}, {"month": "2012-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 128}, {"month": "2012-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 190}, {"month": "2012-10", "violation_description": "STREET CLEANING", "count": 379}, {"month": "2012-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 328}, {"month": "2012-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 331}, {"month": "2012-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 118}, {"month": "2012-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 166}, {"month": "2012-11", "violation_description": "STREET CLEANING", "count": 173}, {"month": "2012-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 286}, {"month": "2012-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 327}, {"month": "2012-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 107}, {"month": "2012-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 145}, {"month": "2013-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 291}, {"month": "2013-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 464}, {"month": "2013-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 125}, {"month": "2013-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 131}, {"month": "2013-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 247}, {"month": "2013-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 247}, {"month": "2013-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 146}, {"month": "2013-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 123}, {"month": "2013-02", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2013-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 317}, {"month": "2013-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 342}, {"month": "2013-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 125}, {"month": "2013-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 162}, {"month": "2013-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 283}, {"month": "2013-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 307}, {"month": "2013-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 146}, {"month": "2013-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 185}, {"month": "2013-04", "violation_description": "STREET CLEANING", "count": 461}, {"month": "2013-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 264}, {"month": "2013-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 317}, {"month": "2013-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 124}, {"month": "2013-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 165}, {"month": "2013-05", "violation_description": "STREET CLEANING", "count": 396}, {"month": "2013-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 217}, {"month": "2013-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 347}, {"month": "2013-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 133}, {"month": "2013-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 181}, {"month": "2013-06", "violation_description": "STREET CLEANING", "count": 346}, {"month": "2013-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 247}, {"month": "2013-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 330}, {"month": "2013-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 129}, {"month": "2013-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 149}, {"month": "2013-07", "violation_description": "STREET CLEANING", "count": 405}, {"month": "2013-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 256}, {"month": "2013-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 327}, {"month": "2013-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 128}, {"month": "2013-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 197}, {"month": "2013-08", "violation_description": "STREET CLEANING", "count": 389}, {"month": "2013-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 207}, {"month": "2013-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 338}, {"month": "2013-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 114}, {"month": "2013-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 159}, {"month": "2013-09", "violation_description": "STREET CLEANING", "count": 342}, {"month": "2013-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 276}, {"month": "2013-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 349}, {"month": "2013-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 125}, {"month": "2013-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 172}, {"month": "2013-10", "violation_description": "STREET CLEANING", "count": 394}, {"month": "2013-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 277}, {"month": "2013-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 303}, {"month": "2013-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 110}, {"month": "2013-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 138}, {"month": "2013-11", "violation_description": "STREET CLEANING", "count": 269}, {"month": "2013-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 291}, {"month": "2013-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 365}, {"month": "2013-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 118}, {"month": "2013-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 126}, {"month": "2013-12", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2014-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 235}, {"month": "2014-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 494}, {"month": "2014-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 113}, {"month": "2014-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 70}, {"month": "2014-01", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2014-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 234}, {"month": "2014-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 324}, {"month": "2014-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 152}, {"month": "2014-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 77}, {"month": "2014-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 330}, {"month": "2014-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 366}, {"month": "2014-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 163}, {"month": "2014-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 147}, {"month": "2014-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 285}, {"month": "2014-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 345}, {"month": "2014-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 137}, {"month": "2014-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 158}, {"month": "2014-04", "violation_description": "STREET CLEANING", "count": 456}, {"month": "2014-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 245}, {"month": "2014-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 350}, {"month": "2014-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 167}, {"month": "2014-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 155}, {"month": "2014-05", "violation_description": "STREET CLEANING", "count": 365}, {"month": "2014-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 209}, {"month": "2014-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 374}, {"month": "2014-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 139}, {"month": "2014-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 179}, {"month": "2014-06", "violation_description": "STREET CLEANING", "count": 382}, {"month": "2014-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 121}, {"month": "2014-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 325}, {"month": "2014-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 147}, {"month": "2014-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 149}, {"month": "2014-07", "violation_description": "STREET CLEANING", "count": 420}, {"month": "2014-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 116}, {"month": "2014-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 334}, {"month": "2014-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 141}, {"month": "2014-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 187}, {"month": "2014-08", "violation_description": "STREET CLEANING", "count": 369}, {"month": "2014-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 156}, {"month": "2014-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 331}, {"month": "2014-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 125}, {"month": "2014-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 169}, {"month": "2014-09", "violation_description": "STREET CLEANING", "count": 355}, {"month": "2014-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 176}, {"month": "2014-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 403}, {"month": "2014-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 122}, {"month": "2014-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 159}, {"month": "2014-10", "violation_description": "STREET CLEANING", "count": 366}, {"month": "2014-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 174}, {"month": "2014-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 352}, {"month": "2014-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 91}, {"month": "2014-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 161}, {"month": "2014-11", "violation_description": "STREET CLEANING", "count": 189}, {"month": "2014-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 153}, {"month": "2014-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 365}, {"month": "2014-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 128}, {"month": "2014-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 166}, {"month": "2015-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 195}, {"month": "2015-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 417}, {"month": "2015-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 135}, {"month": "2015-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 125}, {"month": "2015-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 151}, {"month": "2015-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 218}, {"month": "2015-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 123}, {"month": "2015-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 84}, {"month": "2015-02", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2015-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 221}, {"month": "2015-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 326}, {"month": "2015-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 152}, {"month": "2015-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 184}, {"month": "2015-03", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2015-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 222}, {"month": "2015-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 316}, {"month": "2015-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 123}, {"month": "2015-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2015-04", "violation_description": "STREET CLEANING", "count": 444}, {"month": "2015-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 243}, {"month": "2015-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 351}, {"month": "2015-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 146}, {"month": "2015-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2015-05", "violation_description": "STREET CLEANING", "count": 338}, {"month": "2015-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 227}, {"month": "2015-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 368}, {"month": "2015-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 127}, {"month": "2015-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 162}, {"month": "2015-06", "violation_description": "STREET CLEANING", "count": 417}, {"month": "2015-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 223}, {"month": "2015-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 365}, {"month": "2015-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 146}, {"month": "2015-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 187}, {"month": "2015-07", "violation_description": "STREET CLEANING", "count": 423}, {"month": "2015-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 207}, {"month": "2015-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 338}, {"month": "2015-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 134}, {"month": "2015-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 192}, {"month": "2015-08", "violation_description": "STREET CLEANING", "count": 397}, {"month": "2015-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 210}, {"month": "2015-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 367}, {"month": "2015-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 136}, {"month": "2015-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2015-09", "violation_description": "STREET CLEANING", "count": 369}, {"month": "2015-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 261}, {"month": "2015-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 394}, {"month": "2015-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 129}, {"month": "2015-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 181}, {"month": "2015-10", "violation_description": "STREET CLEANING", "count": 354}, {"month": "2015-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 264}, {"month": "2015-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 323}, {"month": "2015-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 135}, {"month": "2015-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 147}, {"month": "2015-11", "violation_description": "STREET CLEANING", "count": 192}, {"month": "2015-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 237}, {"month": "2015-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 440}, {"month": "2015-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 156}, {"month": "2015-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 138}, {"month": "2015-12", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2016-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 220}, {"month": "2016-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 518}, {"month": "2016-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 123}, {"month": "2016-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 141}, {"month": "2016-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 223}, {"month": "2016-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 318}, {"month": "2016-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 121}, {"month": "2016-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 134}, {"month": "2016-02", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2016-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 220}, {"month": "2016-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 330}, {"month": "2016-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 165}, {"month": "2016-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 170}, {"month": "2016-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 197}, {"month": "2016-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 345}, {"month": "2016-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 162}, {"month": "2016-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 153}, {"month": "2016-04", "violation_description": "STREET CLEANING", "count": 423}, {"month": "2016-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 174}, {"month": "2016-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 401}, {"month": "2016-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 159}, {"month": "2016-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 166}, {"month": "2016-05", "violation_description": "STREET CLEANING", "count": 345}, {"month": "2016-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 191}, {"month": "2016-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 365}, {"month": "2016-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 148}, {"month": "2016-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 131}, {"month": "2016-06", "violation_description": "STREET CLEANING", "count": 380}, {"month": "2016-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 172}, {"month": "2016-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 335}, {"month": "2016-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 143}, {"month": "2016-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 149}, {"month": "2016-07", "violation_description": "STREET CLEANING", "count": 334}, {"month": "2016-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 180}, {"month": "2016-08", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 428}, {"month": "2016-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 153}, {"month": "2016-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 179}, {"month": "2016-08", "violation_description": "STREET CLEANING", "count": 367}, {"month": "2016-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 188}, {"month": "2016-09", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 368}, {"month": "2016-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 108}, {"month": "2016-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 163}, {"month": "2016-09", "violation_description": "STREET CLEANING", "count": 320}, {"month": "2016-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 194}, {"month": "2016-10", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 370}, {"month": "2016-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 115}, {"month": "2016-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 201}, {"month": "2016-10", "violation_description": "STREET CLEANING", "count": 305}, {"month": "2016-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 265}, {"month": "2016-11", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 350}, {"month": "2016-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 133}, {"month": "2016-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 167}, {"month": "2016-11", "violation_description": "STREET CLEANING", "count": 197}, {"month": "2016-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 212}, {"month": "2016-12", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 331}, {"month": "2016-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 125}, {"month": "2016-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 134}, {"month": "2017-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 218}, {"month": "2017-01", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 491}, {"month": "2017-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 122}, {"month": "2017-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 161}, {"month": "2017-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 197}, {"month": "2017-02", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 286}, {"month": "2017-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 110}, {"month": "2017-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 164}, {"month": "2017-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 220}, {"month": "2017-03", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 293}, {"month": "2017-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 143}, {"month": "2017-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 177}, {"month": "2017-03", "violation_description": "STREET CLEANING", "count": 1}, {"month": "2017-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 208}, {"month": "2017-04", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 281}, {"month": "2017-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 126}, {"month": "2017-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 176}, {"month": "2017-04", "violation_description": "STREET CLEANING", "count": 326}, {"month": "2017-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 197}, {"month": "2017-05", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 273}, {"month": "2017-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 133}, {"month": "2017-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 205}, {"month": "2017-05", "violation_description": "STREET CLEANING", "count": 322}, {"month": "2017-06", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 206}, {"month": "2017-06", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 275}, {"month": "2017-06", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 134}, {"month": "2017-06", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 177}, {"month": "2017-06", "violation_description": "STREET CLEANING", "count": 375}, {"month": "2017-07", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 203}, {"month": "2017-07", "violation_description": "EXPIRED PLATES OR TEMPORARY REGISTRATION", "count": 128}, {"month": "2017-07", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 129}, {"month": "2017-07", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 212}, {"month": "2017-07", "violation_description": "STREET CLEANING", "count": 349}, {"month": "2017-08", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 226}, {"month": "2017-08", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 152}, {"month": "2017-08", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 199}, {"month": "2017-08", "violation_description": "STREET CLEANING", "count": 387}, {"month": "2017-09", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 188}, {"month": "2017-09", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 163}, {"month": "2017-09", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 190}, {"month": "2017-09", "violation_description": "STREET CLEANING", "count": 292}, {"month": "2017-10", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 180}, {"month": "2017-10", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 115}, {"month": "2017-10", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 157}, {"month": "2017-10", "violation_description": "STREET CLEANING", "count": 323}, {"month": "2017-11", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 195}, {"month": "2017-11", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 104}, {"month": "2017-11", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 145}, {"month": "2017-11", "violation_description": "STREET CLEANING", "count": 162}, {"month": "2017-12", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 155}, {"month": "2017-12", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 115}, {"month": "2017-12", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 136}, {"month": "2017-12", "violation_description": "STREET CLEANING", "count": 2}, {"month": "2018-01", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 202}, {"month": "2018-01", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 117}, {"month": "2018-01", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 147}, {"month": "2018-02", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 194}, {"month": "2018-02", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 100}, {"month": "2018-02", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 116}, {"month": "2018-03", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 262}, {"month": "2018-03", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 155}, {"month": "2018-03", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 186}, {"month": "2018-04", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 238}, {"month": "2018-04", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 146}, {"month": "2018-04", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 162}, {"month": "2018-04", "violation_description": "STREET CLEANING", "count": 296}, {"month": "2018-05", "violation_description": "EXP. METER NON-CENTRAL BUSINESS DISTRICT", "count": 91}, {"month": "2018-05", "violation_description": "PARKING/STANDING PROHIBITED ANYTIME", "count": 44}, {"month": "2018-05", "violation_description": "RESIDENTIAL PERMIT PARKING", "count": 71}, {"month": "2018-05", "violation_description": "STREET CLEANING", "count": 148}]}}, {"scaleFactor": 2, "mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="visual-q6" class="level1">
+<h1>Visual Q6</h1>
+<ul>
+<li><p>Step Chart: It is easy to see the overall trend of tickets over time of all types of violations, and easy to read the trend (up and down), but type of violations and its relationship to time is not clear because no specific information is not provided.</p></li>
+<li><p>Heatmap: It is easy to see the trend of date over month and abnormalies in each month, and easy to read, but the relationship between time and type of violations is still not clear.</p></li>
+<li><p>Lasagna Plot: It is easy to see the relationship between type of violations and time (date within same motnh), and the pattern over moth. However, the pattern between the total amount of violations and month or date is not easy to spot by eyerolling, and it is too crowded to see pattern within lasagna plot.</p></li>
+</ul>
+</section>
+<section id="visual-q7" class="level1">
+<h1>Visual Q7</h1>
+<p>Step chart is better because it focuses on the relationship between the TOTAL number of violations and time. Not the relationship between the type of violations and time, or the date within the same month, so the step chart is easier.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
+<script>window.backupDefine = window.define; window.define = undefined;</script>
+<script type="text/javascript" src="quarto-preview.js"></script>
+<script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+<script type="text/javascript">
+  const options = {
+    origin: "http://localhost:3709",
+    search: "?quartoPreviewReqId=1728106183771&amp;quartoPreviewThemeCategory=dark",
+    inputFile: "/Users/georgew/Desktop/Fall 2024/PPHA 30538/code/ps1_wang_george.qmd",
+    isPresentation: false
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    window.QuartoPreview.init(options);
+  });
+</script>
